@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">writers-block</string>
+    <string name="app_name">Writer\'s Block</string>
+    <string name="write_button_text">Start Writing</string>
+    <string name="drafts_button_text">Read Drafts</string>
+
+
 </resources>
