@@ -1,6 +1,8 @@
 package com.gitgood.writersblock;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         LinearLayout writeLayout = findViewById(R.id.write_layout);
         LinearLayout draftsLayout = findViewById(R.id.drafts_layout);
@@ -32,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onWriteLayoutClick(View view) {
-        //TODO: go to write activity
+        Intent intent = new Intent(this, WriterActivity.class);
+        startActivity(intent);
+
     }
 
     private void onDraftsLayoutClick(View view) {
