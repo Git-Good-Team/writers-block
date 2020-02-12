@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DraftsListActivity"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/drafts_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_drafts_list_background"
+        android:textColor="@color/color_drafts_list_text"
+        android:divider="@color/color_drafts_list_divider"
+        android:dividerHeight="5dp">
+
+    </ListView>
+</LinearLayout>

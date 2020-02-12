@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         LinearLayout writeLayout = findViewById(R.id.write_layout);
         LinearLayout draftsLayout = findViewById(R.id.drafts_layout);
 
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onDraftsLayoutClick(View view) {
-        //TODO: go to drafts list activity
+        Intent intent = new Intent(this, DraftsListActivity.class);
+        startActivity(intent);
     }
 }
