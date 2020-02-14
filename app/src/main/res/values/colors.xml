@@ -3,4 +3,7 @@
     <color name="color_write_view">#12CBC4</color>
     <color name="color_drafts_view">#1289A7</color>
     <color name="color_menu_label">#ffffff</color>
+    <color name="color_drafts_list_text">#ffffff</color>
+    <color name="color_drafts_list_background">#1289A7</color>
+    <color name="color_drafts_list_divider">#dfe6e9</color>
 </resources>
