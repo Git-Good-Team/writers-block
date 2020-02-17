@@ -11,7 +11,7 @@ public class TimerService extends Service {
     public TimerService() {
     }
 
-    private static int seconds = 10;
+    private static int seconds = 60;
 
     private  final IBinder binder = new TimeBinder();
 
