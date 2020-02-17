@@ -2,6 +2,7 @@ package com.gitgood.writersblock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,8 @@ public class DraftsListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: go to draft details activity
+            Intent intent = new Intent(getApplicationContext(), DraftDetailsActivity.class);
+            startActivity(intent);
             }
         };
 

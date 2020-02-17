@@ -97,9 +97,9 @@ public class WriterActivity extends AppCompatActivity {
 
     //TODO: save contents of file and send to drafts
     public void timeOut() {
-        EditText draft = (EditText) findViewById(R.id.writerDraft);
+        EditText draft = findViewById(R.id.writerDraft);
         String stringDraft = draft.getText().toString();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, DraftDetailsActivity.class);
         intent.putExtra("draft",stringDraft);
         startActivity(intent);
     }
