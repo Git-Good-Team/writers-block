@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 
 public class WriterActivity extends AppCompatActivity {
@@ -21,7 +23,7 @@ public class WriterActivity extends AppCompatActivity {
     private boolean flagDraft = true;
     private String viewTime ="";
     private TimerService time;
-    private TextView timeView;
+    private TextView timeView, adjView, nounView;
     private EditText write;
 
     private boolean bound = false;
@@ -48,7 +50,10 @@ public class WriterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writer);
+        adjView = (TextView) findViewById(R.id.tAdjective);
+        nounView = (TextView) findViewById(R.id.tNoun);
         runTimer();
+
     }
 
     @Override
@@ -69,6 +74,10 @@ public class WriterActivity extends AppCompatActivity {
 
 
     public void onClickStart(View view) {
+
+        adjView.setText("Angry");
+        nounView.setText("Mob");
+
         running = true;
     }
 
@@ -102,6 +111,15 @@ public class WriterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DraftDetailsActivity.class);
         intent.putExtra("draft",stringDraft);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (!running){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+        }
     }
 
 
