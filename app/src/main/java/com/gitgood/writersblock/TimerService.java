@@ -11,7 +11,8 @@ public class TimerService extends Service {
     public TimerService() {
     }
 
-    private static int seconds = 60;
+    private static int seconds = 20;
+    private final int RESET_TIME = seconds;
 
     private  final IBinder binder = new TimeBinder();
 
@@ -23,7 +24,6 @@ public class TimerService extends Service {
         super.onDestroy();
         WriterActivity.running = false;
     }
-
 
     public class TimeBinder extends Binder {
         TimerService getTimeService() {
@@ -44,6 +44,7 @@ public class TimerService extends Service {
             seconds--;
             if(seconds < 0) {
                 WriterActivity.running = false;
+                seconds = RESET_TIME;
                 return time;
             }
             return time;
