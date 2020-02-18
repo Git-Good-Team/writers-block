@@ -25,6 +25,7 @@ public class WriterActivity extends AppCompatActivity {
     private TimerService time;
     private TextView timeView, adjView, nounView;
     private EditText write;
+    final Handler handler = new Handler();
 
     private boolean bound = false;
 
@@ -45,7 +46,6 @@ public class WriterActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,6 @@ public class WriterActivity extends AppCompatActivity {
         adjView = (TextView) findViewById(R.id.tAdjective);
         nounView = (TextView) findViewById(R.id.tNoun);
         runTimer();
-
     }
 
     @Override
@@ -70,6 +69,7 @@ public class WriterActivity extends AppCompatActivity {
             unbindService(connection);
             bound = false;
         }
+        handler.removeCallbacksAndMessages(null);
     }
 
 
@@ -83,7 +83,6 @@ public class WriterActivity extends AppCompatActivity {
 
     private void runTimer() {
         timeView = (TextView) findViewById(R.id.timer);
-        final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +95,6 @@ public class WriterActivity extends AppCompatActivity {
                         timeOut();
                     }
                 }
-
                 handler.postDelayed(this,1000);
             }
         });
@@ -118,7 +116,6 @@ public class WriterActivity extends AppCompatActivity {
         if (!running){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
         }
     }
 

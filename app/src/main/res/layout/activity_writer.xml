@@ -20,6 +20,7 @@
             android:id="@+id/tAdjective"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:hint="@string/adjective"
             android:layout_margin="16dp"
             android:textSize="30sp"/>
 
@@ -28,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:hint="@string/noun"
             android:textSize="30sp" />
     </LinearLayout>
 
