@@ -51,5 +51,11 @@ public class DraftsListActivity extends AppCompatActivity {
         draftsListView.setAdapter(draftsAdapter);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
 }
