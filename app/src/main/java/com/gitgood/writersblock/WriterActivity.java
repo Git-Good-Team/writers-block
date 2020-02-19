@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
-import java.util.Locale;
 
 public class WriterActivity extends AppCompatActivity {
 
@@ -25,6 +23,7 @@ public class WriterActivity extends AppCompatActivity {
     private TimerService time;
     private TextView timeView, adjView, nounView;
     private EditText write;
+    private Button startButton;
     final Handler handler = new Handler();
 
     private boolean bound = false;
@@ -74,9 +73,12 @@ public class WriterActivity extends AppCompatActivity {
 
 
     public void onClickStart(View view) {
-
         adjView.setText("Angry");
         nounView.setText("Mob");
+
+        startButton = (Button) findViewById(R.id.startTimerButton);
+        startButton.setVisibility(View.INVISIBLE);
+        timeView.setVisibility(View.VISIBLE);
 
         running = true;
     }
@@ -92,6 +94,7 @@ public class WriterActivity extends AppCompatActivity {
 
                     // if time is zero then call timeOut to save draft
                     if(viewTime.equals("00:00")) {
+                        timeView.setText("Finished!");
                         timeOut();
                     }
                 }
@@ -118,6 +121,4 @@ public class WriterActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-
 }
