@@ -1,5 +1,6 @@
 package com.gitgood.writersblock;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,10 @@ public class WriterActivity extends AppCompatActivity {
         adjView = (TextView) findViewById(R.id.tAdjective);
         nounView = (TextView) findViewById(R.id.tNoun);
         runTimer();
+
+        Intent batteryReceiverIntent = new Intent(this, BatteryReceiver.class);
+        PendingIntent.getBroadcast(
+                this.getApplicationContext(), 234324243, batteryReceiverIntent, 0);
     }
 
     @Override
