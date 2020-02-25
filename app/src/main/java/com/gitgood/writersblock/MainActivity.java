@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+
+    }
+
     private void onWriteLayoutClick(View view) {
         Intent intent = new Intent(this, WriterActivity.class);
         startActivity(intent);
@@ -41,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void onDraftsLayoutClick(View view) {
         Intent intent = new Intent(this, DraftsListActivity.class);
+        startActivity(intent);
+    }
+
+    public void onSettingsAction(MenuItem menuItem) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
