@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
@@ -18,11 +21,10 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db){
-        System.out.println("Creating database");
         db.execSQL( "CREATE TABLE DRAFT_GENERAL ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "TITLE TEXT,"
-                +  "DATE DATE);");
+                + "DATE DATETIME);");
 
         db.execSQL( "CREATE TABLE DRAFT_CONTENT ("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -38,14 +40,14 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertDraft(String adj_noun, String date, String content){
+    public void insertDraft(String adj_noun, String content){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues generalValues = new ContentValues();
         ContentValues contentValues = new ContentValues();
 
         generalValues.put("TITLE", adj_noun);
-        generalValues.put("DATE", date);
+        generalValues.put("DATE", getDateTime());
 
         contentValues.put("CONTENT", content);
 
@@ -68,6 +70,30 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return result;
+    }
+
+    public ArrayList<String> getAllDates(){
+        ArrayList<String> result = new ArrayList<String>();
+        String selectQuery = "SELECT * FROM DRAFT_GENERAL";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                result.add(cursor.getString(cursor.getColumnIndex("DATE")));
+            }while(cursor.moveToNext());
+        }
+
+        return result;
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 

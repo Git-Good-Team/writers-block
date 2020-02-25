@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -107,10 +108,21 @@ public class WriterActivity extends AppCompatActivity {
 
     //TODO: save contents of file and send to drafts
     public void timeOut() {
+        DraftDatabaseHelper db = new DraftDatabaseHelper(getApplicationContext());
+
         EditText draft = findViewById(R.id.writerDraft);
         String stringDraft = draft.getText().toString();
         Intent intent = new Intent(this, DraftDetailsActivity.class);
-        intent.putExtra("draft",stringDraft);
+
+
+        TextView adj = findViewById(R.id.tAdjective);
+        TextView noun = findViewById(R.id.tNoun);
+
+        String title = adj.getText().toString()+ " " + noun.getText().toString();
+
+        db.insertDraft(title, stringDraft);
+
+        db.close();
         startActivity(intent);
     }
 

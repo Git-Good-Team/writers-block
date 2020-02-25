@@ -36,10 +36,6 @@ public class DraftsListActivity extends AppCompatActivity {
 
         try{
             titles = db.getAllTitles();
-
-            System.out.println(titles.toString());
-
-
         } catch(SQLiteException e){
             Toast toast = Toast.makeText(this,"Database unavailable", Toast.LENGTH_SHORT);
             toast.show();
@@ -74,6 +70,8 @@ public class DraftsListActivity extends AppCompatActivity {
         ListView draftsListView = findViewById(R.id.drafts_list);
         draftsListView.setOnItemClickListener(itemClickListener);
         draftsListView.setAdapter(draftsAdapter);
+
+        db.close();
     }
 
     @Override
