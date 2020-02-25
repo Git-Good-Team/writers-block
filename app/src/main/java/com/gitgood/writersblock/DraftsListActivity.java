@@ -19,40 +19,25 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class DraftsListActivity extends AppCompatActivity {
+    private DraftDatabaseHelper db;
 
     private String[] examples = {"Beautiful Sunshine", "Fast Car", "Dirty Street","Dangerous Road",
             "Angry Mob","Vicious Beast","Doomed Saviour", "Artistic Dance", "Lovely Lady",
             "Hallowed Grove","Lost Sector", "Frightening Grimace"};
 
-    private ArrayList<String> titleList;
+    private ArrayList<String> titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drafts_list);
 
-        SQLiteOpenHelper draftDatabaseHelper = new DraftDatabaseHelper(this);
+        db = new DraftDatabaseHelper(getApplicationContext());
 
         try{
-            SQLiteDatabase db = draftDatabaseHelper.getReadableDatabase();
+            titles = db.getAllTitles();
 
-            Cursor cursor = db.query("DRAFT_GENERAL",
-                    new String[] {
-                            "TITLE"
-                    }, null, null, null, null, null);
-
-            titleList = new ArrayList<String>();
-            cursor.moveToFirst();
-            while(!cursor.isAfterLast()) {
-                titleList.add(cursor.getString(cursor.getColumnIndex("TITLE"))); //add the item
-                cursor.moveToNext();
-            }
-
-            System.out.println("Got data");
-            System.out.println(titleList.toString());
-
-            db.close();
-            cursor.close();
+            System.out.println(titles.toString());
 
 
         } catch(SQLiteException e){
@@ -63,7 +48,7 @@ public class DraftsListActivity extends AppCompatActivity {
 
 
         ArrayAdapter<String> draftsAdapter =
-            new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList) {
+            new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles) {
 
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
