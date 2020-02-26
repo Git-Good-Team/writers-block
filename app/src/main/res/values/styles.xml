@@ -3,4 +3,8 @@
         <item name="android:textColor">#000000</item>
     </style>
 
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/color_settings_on</item>
+    </style>
+
 </resources>
