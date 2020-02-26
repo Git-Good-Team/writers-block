@@ -7,4 +7,6 @@
     <string name="start">Start</string>
     <string name="startWrite">Start Writing...</string>
     <string name="low_battery_warning">"Battery low. Consider charging your phone before you continue writing."</string>
+    <string name="timer_setting_title">Timer</string>
+    <string name="finish_button_text">Finish</string>
 </resources>
