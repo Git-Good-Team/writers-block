@@ -114,11 +114,9 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         String id = key+"";
         String selectQuery = "SELECT TITLE, CONTENT FROM DRAFT_CONTENT LEFT JOIN DRAFT_GENERAL "
             + "ON DRAFT_CONTENT._id=DRAFT_GENERAL._id WHERE DRAFT_CONTENT._id="+id;
-//JOIN DRAFT_CONTENT ON DRAFT_GENERAL._id=DRAFT_CONTENT.GENERAL_ID WHERE DRAFT_GENERAL._id = "+id
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery,null);
-//        printCursor(cursor,"TITLE");
-//        printCursor(cursor,"CONTENT");
+
         if (cursor.moveToFirst()){
             String title = cursor.getString(cursor.getColumnIndex("TITLE"));
             String content = cursor.getString(cursor.getColumnIndex(("CONTENT")));
