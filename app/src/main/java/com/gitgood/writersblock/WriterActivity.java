@@ -114,7 +114,8 @@ public class WriterActivity extends AppCompatActivity {
     }
 
     public void onClickFinish(View view) {
-        timeOut();
+        Intent intent = new Intent(this, DraftDetailsActivity.class);
+        startActivity(intent);
     }
 
     private void runTimer() {
