@@ -6,14 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WriterActivity"
+    android:background="@color/color_drafts_view"
+    android:textColor="@android:color/white"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:padding="16dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:background="@color/color_write_view"
         android:orientation="horizontal">
 
         <TextView
@@ -22,6 +26,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/adjective"
             android:layout_margin="16dp"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:textSize="30sp"/>
 
         <TextView
@@ -30,26 +36,37 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:hint="@string/noun"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:textSize="30sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:textSize="30sp" />
+        android:layout_margin="20dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:text="@string/start"
-        android:onClick="onClickStart"
-        />
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:textColor="@android:color/white"
+            android:visibility="invisible"
+            android:textSize="30sp" />
 
+        <Button
+            android:id="@+id/startTimerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@color/color_write_view"
+            android:text="@string/start"
+            android:textSize="20sp"
+            android:onClick="onClickStart" />
+    </FrameLayout>
 
     <EditText
         android:id="@+id/writerDraft"
@@ -57,6 +74,7 @@
         android:layout_height="0dp"
         android:gravity="top"
         android:layout_weight="1"
+        android:textColor="@android:color/white"
         android:hint="@string/startWrite"
         android:padding="16dp" />
 
