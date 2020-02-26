@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ public class WriterActivity extends AppCompatActivity {
     private EditText write;
     private Button startButton;
     final Handler handler = new Handler();
+    private BatteryReceiver batteryReceiver;
 
     private boolean bound = false;
 
@@ -53,10 +55,7 @@ public class WriterActivity extends AppCompatActivity {
         adjView = (TextView) findViewById(R.id.tAdjective);
         nounView = (TextView) findViewById(R.id.tNoun);
         runTimer();
-
-        Intent batteryReceiverIntent = new Intent(this, BatteryReceiver.class);
-        PendingIntent.getBroadcast(
-                this.getApplicationContext(), 234324243, batteryReceiverIntent, 0);
+        registerBatteryReceiver();
     }
 
     @Override
@@ -74,6 +73,7 @@ public class WriterActivity extends AppCompatActivity {
             bound = false;
         }
         handler.removeCallbacksAndMessages(null);
+        unregisterReceiver(batteryReceiver);
     }
 
 
@@ -108,7 +108,11 @@ public class WriterActivity extends AppCompatActivity {
         });
     }
 
-
+    private void registerBatteryReceiver() {
+        batteryReceiver = new BatteryReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryReceiver, intentFilter);
+    }
 
     //TODO: save contents of file and send to drafts
     public void timeOut() {

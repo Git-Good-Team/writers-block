@@ -6,4 +6,5 @@
     <string name="noun">Noun</string>
     <string name="start">Start</string>
     <string name="startWrite">Start Writing...</string>
+    <string name="low_battery_warning">"Battery low. Consider charging your phone before you continue writing."</string>
 </resources>

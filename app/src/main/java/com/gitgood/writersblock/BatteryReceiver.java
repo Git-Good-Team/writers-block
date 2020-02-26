@@ -10,19 +10,16 @@ import android.widget.Toast;
 
 public class BatteryReceiver extends BroadcastReceiver {
 
+    private static final double LOW_BATTERY_PERCENTAGE = 0.15;
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = context.registerReceiver(null, intentFilter);
+        int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float percentage = level / scale;
 
-        final int currentLevel = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        final int max = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        final int percentage = (int) Math.round((currentLevel * 100.0) / max);
-
-        Log.v(null, "LEVEL" + percentage);
-
-        if (percentage <= 15) {
-            Toast.makeText(context, "Battery low. Consider charging your phone", Toast.LENGTH_LONG).show();
+        if (percentage <= LOW_BATTERY_PERCENTAGE) {
+            Toast.makeText(context, R.string.low_battery_warning, Toast.LENGTH_LONG).show();
         }
     }
 }
