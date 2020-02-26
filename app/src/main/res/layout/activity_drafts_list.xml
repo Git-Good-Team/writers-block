@@ -11,7 +11,7 @@
         android:id="@+id/drafts_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_drafts_list_background"
+        android:background="@color/color_secondary"
         android:textColor="@color/color_drafts_list_text"
         android:divider="@color/color_drafts_list_divider"
         android:dividerHeight="5dp">
