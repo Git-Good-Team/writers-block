@@ -72,6 +72,16 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public Cursor getAllTitlesCursor(){
+        String selectQuery = "SELECT _id, TITLE FROM DRAFT_GENERAL";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        return cursor;
+    }
+
     public ArrayList<String> getAllDates(){
         ArrayList<String> result = new ArrayList<String>();
         String selectQuery = "SELECT * FROM DRAFT_GENERAL";
@@ -85,6 +95,7 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
                 result.add(cursor.getString(cursor.getColumnIndex("DATE")));
             }while(cursor.moveToNext());
         }
+        db.close();
 
         return result;
     }
@@ -95,6 +106,7 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
 
 
 }
