@@ -51,4 +51,8 @@ public class TimerService extends Service {
         }
         return time;
     }
+
+    public void reset() {
+        seconds = RESET_TIME;
+    }
 }

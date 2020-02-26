@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -29,15 +30,16 @@ public class WriterActivity extends AppCompatActivity {
     final static String API_KEY = "bdvw0bfb5fnxqa410rpswoi9qhe7fp5zg772hyseuv5wyny9e";
 
     public static boolean running;
-    private boolean flagDraft = true;
+    private boolean timerEnabled;
     private String viewTime ="";
     private TimerService time;
     private TextView timeView, verbView, nounView;
     private EditText write;
     private Button startButton;
     final Handler handler = new Handler();
-
     private boolean bound = false;
+    private static final String SHARED_PREFERENCES = "shared_preferences";
+    private static final String TIMER_PREFERENCE = "timer_enabled";
 
 
     private ServiceConnection connection = new ServiceConnection() {
@@ -62,31 +64,47 @@ public class WriterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_writer);
         verbView = (TextView) findViewById(R.id.tAdjective);
         nounView = (TextView) findViewById(R.id.tNoun);
-        runTimer();
+        timeView = (TextView) findViewById(R.id.timer);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, 0);
+        timerEnabled = sharedPreferences.getBoolean(TIMER_PREFERENCE, true);
+
+        if (timerEnabled) {
+            runTimer();
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, TimerService.class);
-        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
+        if (timerEnabled) {
+            Intent intent = new Intent(this, TimerService.class);
+            bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(bound) {
-            unbindService(connection);
-            bound = false;
+
+        if (timerEnabled) {
+            if (bound) {
+                unbindService(connection);
+                bound = false;
+            }
+            handler.removeCallbacksAndMessages(null);
         }
-        handler.removeCallbacksAndMessages(null);
     }
 
 
     public void onClickStart(View view) {
 
         startButton = (Button) findViewById(R.id.startTimerButton);
+        Button finishButton = findViewById(R.id.finishButton);
+
         startButton.setVisibility(View.INVISIBLE);
+        finishButton.setVisibility(View.VISIBLE);
         timeView.setVisibility(View.VISIBLE);
 
         connectAdjective();
@@ -95,8 +113,11 @@ public class WriterActivity extends AppCompatActivity {
         running = true;
     }
 
+    public void onClickFinish(View view) {
+        timeOut();
+    }
+
     private void runTimer() {
-        timeView = (TextView) findViewById(R.id.timer);
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -115,12 +136,12 @@ public class WriterActivity extends AppCompatActivity {
         });
     }
 
-
-
     //TODO: save contents of file and send to drafts
     public void timeOut() {
         EditText draft = findViewById(R.id.writerDraft);
         String stringDraft = draft.getText().toString();
+        handler.removeCallbacksAndMessages(null);
+        time.reset();
         Intent intent = new Intent(this, DraftDetailsActivity.class);
         intent.putExtra("draft",stringDraft);
         startActivity(intent);
