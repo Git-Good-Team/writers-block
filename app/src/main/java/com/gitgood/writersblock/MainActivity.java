@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout writeLayout = findViewById(R.id.write_layout);
         LinearLayout draftsLayout = findViewById(R.id.drafts_layout);
+        LinearLayout dailyWordLayout = findViewById(R.id.daily_word_layout);
 
         writeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onDraftsLayoutClick(view);
+            }
+        });
+
+        dailyWordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDailyWordLayoutClick(view);
             }
         });
 
@@ -50,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void onDraftsLayoutClick(View view) {
         Intent intent = new Intent(this, DraftsListActivity.class);
+        startActivity(intent);
+    }
+
+    private void onDailyWordLayoutClick(View view) {
+        Intent intent = new Intent(this, DailyWordActivity.class);
         startActivity(intent);
     }
 

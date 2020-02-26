@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="vertical"
-        android:background="@color/color_draft_detail_background"
+        android:background="@color/color_secondary"
         android:fillViewport="true">
 
         <LinearLayout
@@ -35,7 +35,8 @@
             android:id="@+id/content_text_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:textColor="@color/color_draft_detail_text"/>
+            android:textColor="@color/color_draft_detail_text"
+            android:textSize="@dimen/draft_text_size"/>
         </LinearLayout>
     </ScrollView>
 
