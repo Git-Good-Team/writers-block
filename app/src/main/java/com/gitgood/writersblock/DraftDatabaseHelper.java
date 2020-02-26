@@ -40,7 +40,7 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertDraft(String adj_noun, String content){
+    public long insertDraft(String adj_noun, String content){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues generalValues = new ContentValues();
@@ -51,8 +51,9 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put("CONTENT", content);
 
-        db.insert("DRAFT_GENERAL", null, generalValues);
+        long id = db.insert("DRAFT_GENERAL", null, generalValues);
         db.insert("DRAFT_CONTENT", null, contentValues);
+        return id;
     }
 
     public ArrayList<String> getAllTitles(){
@@ -107,6 +108,44 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return dateFormat.format(date);
     }
 
+    public String[] getContent(int key){
+        System.out.println("--------------------printing cursor------------");
+        String[] result = new String[2];
+        String id = key+"";
+        String selectQuery = "SELECT TITLE, CONTENT FROM DRAFT_CONTENT LEFT JOIN DRAFT_GENERAL "
+            + "ON DRAFT_CONTENT._id=DRAFT_GENERAL._id WHERE DRAFT_CONTENT._id="+id;
+//JOIN DRAFT_CONTENT ON DRAFT_GENERAL._id=DRAFT_CONTENT.GENERAL_ID WHERE DRAFT_GENERAL._id = "+id
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+//        printCursor(cursor,"TITLE");
+//        printCursor(cursor,"CONTENT");
+        if (cursor.moveToFirst()){
+            String title = cursor.getString(cursor.getColumnIndex("TITLE"));
+            String content = cursor.getString(cursor.getColumnIndex(("CONTENT")));
+
+            System.out.println(title);
+            System.out.println(content);
+
+            result[0] = title;
+            result[1] = content;
+
+        }
+
+
+
+        return result;
+    }
+
+    private void printCursor(Cursor cursor, String column){
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String name = cursor.getString(cursor.getColumnIndex(column));
+
+                System.out.println(name);
+                cursor.moveToNext();
+            }
+        }
+    }
 
 
 }

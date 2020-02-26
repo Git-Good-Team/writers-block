@@ -61,6 +61,10 @@ public class DraftsListActivity extends AppCompatActivity {
                 int rowId = cursor.getPosition();
 
                 System.out.println(rowId);
+
+                Intent intent = new Intent(getApplicationContext(), DraftDetailsActivity.class);
+                intent.putExtra("id", rowId);
+                startActivity(intent);
             }
         });
 

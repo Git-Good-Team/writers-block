@@ -120,7 +120,10 @@ public class WriterActivity extends AppCompatActivity {
 
         String title = adj.getText().toString()+ " " + noun.getText().toString();
 
-        db.insertDraft(title, stringDraft);
+        long rowId = db.insertDraft(title, stringDraft);
+        System.out.println(rowId);
+
+        intent.putExtra("id", rowId);
 
         db.close();
         startActivity(intent);
