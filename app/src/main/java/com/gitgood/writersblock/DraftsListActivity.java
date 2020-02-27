@@ -12,17 +12,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class DraftsListActivity extends AppCompatActivity {
     private DraftDatabaseHelper db;
     private SimpleCursorAdapter draftCursor;
-
-    private String[] examples = {"Beautiful Sunshine", "Fast Car", "Dirty Street","Dangerous Road",
-            "Angry Mob","Vicious Beast","Doomed Saviour", "Artistic Dance", "Lovely Lady",
-            "Hallowed Grove","Lost Sector", "Frightening Grimace"};
-
-    private ArrayList<String> titles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +41,6 @@ public class DraftsListActivity extends AppCompatActivity {
         };
 
 
-        System.out.println(db.getAllTitles());
         final ListView lvDrafts = findViewById(R.id.drafts_list);
         lvDrafts.setAdapter(draftCursor);
 
@@ -58,9 +49,9 @@ public class DraftsListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View convertView, int position, long id) {
 
                 cursor.moveToPosition(position);
-                int rowId = cursor.getPosition();
 
-                System.out.println(rowId);
+                //We add +1 to compensate for zero-indexing vs table id difference.
+                long rowId = cursor.getPosition()+1;
 
                 Intent intent = new Intent(getApplicationContext(), DraftDetailsActivity.class);
                 intent.putExtra("id", rowId);

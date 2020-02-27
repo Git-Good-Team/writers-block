@@ -17,13 +17,18 @@ public class DraftDetailsActivity extends AppCompatActivity {
         long id = intent.getLongExtra("id",0);
         db = new DraftDatabaseHelper(getApplicationContext());
 
+        System.out.println("Rowid on details: "+id);
 
-        TextView contentTextView = findViewById(R.id.content_text_view);
-
+        TextView tvTitle = findViewById(R.id.subject_text_view);
+        TextView tvContent = findViewById(R.id.content_text_view);
 
         String[] data = db.getContent(id);
+        String title = data[0];
+        String content = data[1];
 
-        contentTextView.setText(data[1]);
+        tvTitle.setText(title);
+        tvContent.setText(content);
+
 
     }
 

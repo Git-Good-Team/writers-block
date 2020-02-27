@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/draft_title_margin"
-                android:text="Angry Mob"
                 android:textColor="@color/color_draft_detail_text"
                 android:gravity="center"
                 android:textSize="@dimen/draft_title_size"/>
