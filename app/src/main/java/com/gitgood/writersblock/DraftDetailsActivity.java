@@ -14,7 +14,7 @@ public class DraftDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_draft_details);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id",0);
+        long id = intent.getLongExtra("id",0);
         db = new DraftDatabaseHelper(getApplicationContext());
 
 

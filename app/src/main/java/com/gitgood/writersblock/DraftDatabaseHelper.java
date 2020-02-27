@@ -108,7 +108,7 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return dateFormat.format(date);
     }
 
-    public String[] getContent(int key){
+    public String[] getContent(long key){
         System.out.println("--------------------printing cursor------------");
         String[] result = new String[2];
         String id = key+"";
