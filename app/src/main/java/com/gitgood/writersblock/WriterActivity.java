@@ -139,12 +139,26 @@ public class WriterActivity extends AppCompatActivity {
 
     //TODO: save contents of file and send to drafts
     public void timeOut() {
+        DraftDatabaseHelper db = new DraftDatabaseHelper(getApplicationContext());
+
         EditText draft = findViewById(R.id.writerDraft);
         String stringDraft = draft.getText().toString();
         handler.removeCallbacksAndMessages(null);
         time.reset();
         Intent intent = new Intent(this, DraftDetailsActivity.class);
-        intent.putExtra("draft",stringDraft);
+
+
+        TextView adj = findViewById(R.id.tAdjective);
+        TextView noun = findViewById(R.id.tNoun);
+
+        String title = adj.getText().toString()+ " " + noun.getText().toString();
+
+        long rowId = db.insertDraft(title, stringDraft);
+        System.out.println(rowId);
+
+        intent.putExtra("id", rowId);
+
+        db.close();
         startActivity(intent);
     }
 
