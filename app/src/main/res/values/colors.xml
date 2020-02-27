@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_write_view">#12CBC4</color>
-    <color name="color_drafts_view">#1289A7</color>
+    <color name="color_primary">#81ecec</color>
+    <color name="color_secondary">#74b9ff</color>
+    <color name="color_tertiary">#a29bfe</color>
     <color name="color_menu_label">#ffffff</color>
     <color name="color_drafts_list_text">#ffffff</color>
-    <color name="color_drafts_list_background">#1289A7</color>
     <color name="color_drafts_list_divider">#dfe6e9</color>
-    <color name="color_draft_detail_background">#1289A7</color>
     <color name="color_draft_detail_text">#ffffff</color>
+    <color name="color_settings_background">#dfe6e9</color>
+    <color name="color_settings_text">#000000</color>
+    <color name="color_settings_on">#12CBC4</color>
 </resources>

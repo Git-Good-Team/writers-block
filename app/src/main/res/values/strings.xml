@@ -2,8 +2,11 @@
     <string name="app_name">Writer\'s Block</string>
     <string name="write_button_text">Start Writing</string>
     <string name="drafts_button_text">Read Drafts</string>
+    <string name="daily_word_button_text">Word of the Day</string>
     <string name="adjective">Adjective</string>
     <string name="noun">Noun</string>
     <string name="start">Start</string>
     <string name="startWrite">Start Writing...</string>
+    <string name="timer_setting_title">Timer</string>
+    <string name="finish_button_text">Finish</string>
 </resources>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WriterActivity"
-    android:background="@color/color_drafts_view"
+    android:background="@color/color_secondary"
     android:textColor="@android:color/white"
     android:orientation="vertical" >
 
@@ -17,7 +17,7 @@
         android:padding="16dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@color/color_write_view"
+        android:background="@color/color_primary"
         android:orientation="horizontal">
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
-            android:background="@color/color_write_view"
+            android:background="@color/color_primary"
             android:text="@string/start"
             android:textSize="20sp"
             android:onClick="onClickStart" />
@@ -77,6 +77,19 @@
         android:textColor="@android:color/white"
         android:hint="@string/startWrite"
         android:padding="16dp" />
+
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@color/color_primary"
+        android:text="@string/finish_button_text"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        android:onClick="onClickFinish" />
 
 
 </LinearLayout>

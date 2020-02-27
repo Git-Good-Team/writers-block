@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#BFF8F4"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -15,7 +14,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/color_write_view">
+        android:background="@color/color_primary">
 
         <ImageView
             android:layout_width="@dimen/icon_dimension"
@@ -40,7 +39,7 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="@color/color_drafts_view">
+        android:background="@color/color_secondary">
 
         <ImageView
             android:layout_width="@dimen/icon_dimension"
@@ -57,6 +56,31 @@
             android:textSize="@dimen/menu_text_size"
             android:textColor="@color/color_menu_label"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_word_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/color_tertiary">
+
+        <ImageView
+            android:layout_width="@dimen/icon_dimension"
+            android:layout_height="@dimen/icon_dimension"
+            android:layout_marginTop="@dimen/icon_margin_top"
+            android:layout_marginBottom="@dimen/icon_margin_bottom"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_daily_word"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_word_button_text"
+            android:textSize="@dimen/menu_text_size"
+            android:textColor="@color/color_menu_label"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout writeLayout = findViewById(R.id.write_layout);
         LinearLayout draftsLayout = findViewById(R.id.drafts_layout);
+        LinearLayout dailyWordLayout = findViewById(R.id.daily_word_layout);
 
         writeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +34,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        dailyWordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onDailyWordLayoutClick(view);
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+
     }
 
     private void onWriteLayoutClick(View view) {
@@ -41,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void onDraftsLayoutClick(View view) {
         Intent intent = new Intent(this, DraftsListActivity.class);
+        startActivity(intent);
+    }
+
+    private void onDailyWordLayoutClick(View view) {
+        Intent intent = new Intent(this, DailyWordActivity.class);
+        startActivity(intent);
+    }
+
+    public void onSettingsAction(MenuItem menuItem) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }
