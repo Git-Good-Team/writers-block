@@ -3,6 +3,7 @@
     <color name="color_primary">#81ecec</color>
     <color name="color_secondary">#74b9ff</color>
     <color name="color_tertiary">#a29bfe</color>
+    <color name="color_standard_text">#ffffff</color>
     <color name="color_menu_label">#ffffff</color>
     <color name="color_drafts_list_text">#ffffff</color>
     <color name="color_drafts_list_divider">#dfe6e9</color>

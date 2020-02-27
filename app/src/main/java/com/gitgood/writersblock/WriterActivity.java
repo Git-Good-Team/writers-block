@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -234,6 +235,7 @@ public class WriterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Word> call, Throwable throwable) {
                 Log.e(TAG, throwable.toString());
+                Toast.makeText(getBaseContext(), R.string.api_connection_error_message, Toast.LENGTH_LONG).show();
             }
         });
     }
