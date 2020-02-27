@@ -19,11 +19,13 @@ public class DraftDetailsActivity extends AppCompatActivity {
 
 
         TextView contentTextView = findViewById(R.id.content_text_view);
+        TextView tvTitle = findViewById(R.id.subject_text_view);
 
 
         String[] data = db.getContent(id);
 
         contentTextView.setText(data[1]);
+        tvTitle.setText(data[0]);
 
     }
 

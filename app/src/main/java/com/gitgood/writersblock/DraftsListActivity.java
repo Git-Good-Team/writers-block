@@ -58,7 +58,7 @@ public class DraftsListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View convertView, int position, long id) {
 
                 cursor.moveToPosition(position);
-                int rowId = cursor.getPosition();
+                long rowId = cursor.getPosition()+1;
 
                 System.out.println(rowId);
 
