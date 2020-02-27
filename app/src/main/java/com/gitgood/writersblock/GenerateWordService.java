@@ -11,4 +11,7 @@ public interface GenerateWordService {
 
     @GET("words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=noun&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=4&maxLength=7&")
     Call<Word> getNoun(@Query("api_key") String apiKey);
+
+    @GET("words.json/wordOfTheDay")
+    Call<DailyWord> getWordOfTheDay(@Query("api_key") String apiKey);
 }
