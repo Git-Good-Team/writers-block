@@ -1,8 +1,10 @@
 package com.gitgood.writersblock;
 
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class WriterActivity extends AppCompatActivity {
     private EditText write;
     private Button startButton;
     final Handler handler = new Handler();
+    private BatteryReceiver batteryReceiver;
     private boolean bound = false;
     private static final String SHARED_PREFERENCES = "shared_preferences";
     private static final String TIMER_PREFERENCE = "timer_enabled";
@@ -64,6 +67,10 @@ public class WriterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_writer);
         verbView = (TextView) findViewById(R.id.tAdjective);
         nounView = (TextView) findViewById(R.id.tNoun);
+
+        runTimer();
+        registerBatteryReceiver();
+
         timeView = (TextView) findViewById(R.id.timer);
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, 0);
@@ -72,6 +79,7 @@ public class WriterActivity extends AppCompatActivity {
         if (timerEnabled) {
             runTimer();
         }
+
     }
 
     @Override
@@ -95,6 +103,8 @@ public class WriterActivity extends AppCompatActivity {
             }
             handler.removeCallbacksAndMessages(null);
         }
+
+        unregisterReceiver(batteryReceiver);
     }
 
 
@@ -135,6 +145,12 @@ public class WriterActivity extends AppCompatActivity {
                 handler.postDelayed(this,1000);
             }
         });
+    }
+
+    private void registerBatteryReceiver() {
+        batteryReceiver = new BatteryReceiver();
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryReceiver, intentFilter);
     }
 
     //TODO: save contents of file and send to drafts
