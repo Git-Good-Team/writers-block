@@ -19,6 +19,7 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
     DraftDatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL( "CREATE TABLE DRAFT_GENERAL ("
@@ -40,6 +41,9 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Given the {@param adj_noun} {@param content}, instert data into DRAFT_GENERAL and DRAFT_CONTENT tables.
+     */
     public long insertDraft(String adj_noun, String content){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -56,23 +60,12 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public ArrayList<String> getAllTitles(){
-        ArrayList<String> result = new ArrayList<String>();
-        String selectQuery = "SELECT * FROM DRAFT_GENERAL";
 
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(selectQuery,null);
-
-        if(cursor.moveToFirst()){
-            do{
-                result.add(cursor.getString(cursor.getColumnIndex("TITLE")));
-            }while(cursor.moveToNext());
-        }
-
-        return result;
-    }
-
+    /**
+     * Returns a cursor object that has the values _id and TITLE from the DRAFT_GENERAL table.
+     * Primarily used to generate list of drafts in DraftsListActivity.java.
+     */
     public Cursor getAllTitlesCursor(){
         String selectQuery = "SELECT _id, TITLE FROM DRAFT_GENERAL";
 
@@ -83,24 +76,12 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public ArrayList<String> getAllDates(){
-        ArrayList<String> result = new ArrayList<String>();
-        String selectQuery = "SELECT * FROM DRAFT_GENERAL";
 
-        SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(selectQuery,null);
-
-        if(cursor.moveToFirst()){
-            do{
-                result.add(cursor.getString(cursor.getColumnIndex("DATE")));
-            }while(cursor.moveToNext());
-        }
-        db.close();
-
-        return result;
-    }
-
+    /**
+     * Returns the current time and date in yyyy-MM-dd HH:mm:ss format.
+     * Used to store the current time a draft was written / stored.
+     */
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -108,8 +89,12 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         return dateFormat.format(date);
     }
 
+    /**
+     * Takes in the {@param key} to identify which data is to be returned.
+     * Returns the title and content from the given key.
+     */
+
     public String[] getContent(long key){
-        System.out.println("--------------------printing cursor------------");
         String[] result = new String[2];
         String id = key+"";
         String selectQuery = "SELECT TITLE, CONTENT FROM DRAFT_CONTENT LEFT JOIN DRAFT_GENERAL "
@@ -129,11 +114,13 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
 
         }
 
-
-
         return result;
     }
 
+    /**
+     * Prints all items within the given column.
+     * Does not have any functionality for the app itself.
+     */
     private void printCursor(Cursor cursor, String column){
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -145,5 +132,51 @@ public class DraftDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Returns an ArrayList of all titles from the DRAFT_GENERAL table.
+     * Used to store the current time a draft was written / stored.
+     *
+     * Does not have any functionality for the app itself.
+     */
+    public ArrayList<String> getAllTitles(){
+        ArrayList<String> result = new ArrayList<String>();
+        String selectQuery = "SELECT * FROM DRAFT_GENERAL";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                result.add(cursor.getString(cursor.getColumnIndex("TITLE")));
+            }while(cursor.moveToNext());
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the current time and date in yyyy-MM-dd HH:mm:ss format.
+     * Used to store the current time a draft was written / stored.
+     *
+     * Does not have actual functionality on its own.
+     */
+    public ArrayList<String> getAllDates(){
+        ArrayList<String> result = new ArrayList<String>();
+        String selectQuery = "SELECT * FROM DRAFT_GENERAL";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                result.add(cursor.getString(cursor.getColumnIndex("DATE")));
+            }while(cursor.moveToNext());
+        }
+        db.close();
+
+        return result;
+    }
 
 }
