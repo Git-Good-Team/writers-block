@@ -103,6 +103,7 @@ public class DailyWordActivity extends AppCompatActivity {
         partOfSpeechTextView.setLayoutParams(layoutParams);
         partOfSpeechTextView.setText(partOfSpeech);
         partOfSpeechTextView.setTextColor(getResources().getColor(R.color.color_standard_text));
+        partOfSpeechTextView.setTextSize(getResources().getDimension(R.dimen.definition_text_size));
         partOfSpeechTextView.setTypeface(null, Typeface.ITALIC);
 
         layout.addView(partOfSpeechTextView);
@@ -116,6 +117,7 @@ public class DailyWordActivity extends AppCompatActivity {
         layoutParams.setMargins(10, 0, 0, 10);
         definitionTextView.setLayoutParams(layoutParams);
         definitionTextView.setTextColor(getResources().getColor(R.color.color_standard_text));
+        definitionTextView.setTextSize(getResources().getDimension(R.dimen.definition_text_size));
         definitionTextView.setText(position + ". " + definition);
 
         layout.addView(definitionTextView);
