@@ -12,14 +12,20 @@ public class SettingsActivity extends AppCompatActivity {
 
     private static final String SHARED_PREFERENCES = "shared_preferences";
     private static final String TIMER_PREFERENCE = "timer_enabled";
+    private static final String BATTERY_WARNING_PREFERENCE = "battery_warning_enabled";
+
+    private Switch timerSwitch;
+    private Switch batterySwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        timerSwitch = findViewById(R.id.timer_switch);
+        batterySwitch = findViewById(R.id.battery_switch);
+
         initializeSettings();
-        Switch timerSwitch = findViewById(R.id.timer_switch);
 
         timerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -31,13 +37,25 @@ public class SettingsActivity extends AppCompatActivity {
                 sharedPreferencesEditor.apply();
             }
         });
+
+        batterySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor sharedPreferencesEditor = getSharedPreferences(SHARED_PREFERENCES,0).edit();
+
+                sharedPreferencesEditor.putBoolean(BATTERY_WARNING_PREFERENCE, isChecked);
+                sharedPreferencesEditor.apply();
+            }
+        });
     }
 
     private void initializeSettings() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, 0);
-        Switch timerSwitch = findViewById(R.id.timer_switch);
         Boolean timerSwitchEnabled = sharedPreferences.getBoolean(TIMER_PREFERENCE, true);
+        Boolean batterySwitchEnabled = sharedPreferences.getBoolean(BATTERY_WARNING_PREFERENCE, true);
 
         timerSwitch.setChecked(timerSwitchEnabled);
+        batterySwitch.setChecked(batterySwitchEnabled);
     }
 }
