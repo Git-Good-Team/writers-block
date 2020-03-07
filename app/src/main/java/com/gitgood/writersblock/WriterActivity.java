@@ -44,7 +44,7 @@ public class WriterActivity extends AppCompatActivity {
     private boolean bound = false;
     private static final String SHARED_PREFERENCES = "shared_preferences";
     private static final String TIMER_PREFERENCE = "timer_enabled";
-
+    private static final String BATTERY_WARNING_PREFERENCE = "battery_warning_enabled";
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -66,18 +66,21 @@ public class WriterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writer);
-        verbView = (TextView) findViewById(R.id.tAdjective);
-        nounView = (TextView) findViewById(R.id.tNoun);
-        timeView = (TextView) findViewById(R.id.timer);
+        verbView = findViewById(R.id.tAdjective);
+        nounView = findViewById(R.id.tNoun);
+        timeView = findViewById(R.id.timer);
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, 0);
         timerEnabled = sharedPreferences.getBoolean(TIMER_PREFERENCE, true);
+        Boolean batteryWarningEnabled = sharedPreferences.getBoolean(BATTERY_WARNING_PREFERENCE, true);
 
         if (timerEnabled) {
             runTimer();
         }
 
-        registerBatteryReceiver();
+        if (batteryWarningEnabled) {
+            registerBatteryReceiver();
+        }
     }
 
     @Override

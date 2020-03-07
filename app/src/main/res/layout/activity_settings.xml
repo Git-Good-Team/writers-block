@@ -15,4 +15,12 @@
         android:textSize="@dimen/settings_item_text_size"
         android:padding="@dimen/settings_item_padding"
         android:text="@string/timer_setting_title" />
+    <Switch
+        android:id="@+id/battery_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_settings_text"
+        android:textSize="@dimen/settings_item_text_size"
+        android:padding="@dimen/settings_item_padding"
+        android:text="@string/battery_warning_setting_title" />
 </LinearLayout>
