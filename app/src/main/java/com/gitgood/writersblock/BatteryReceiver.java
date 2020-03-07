@@ -18,10 +18,11 @@ public class BatteryReceiver extends BroadcastReceiver {
         int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         double percentage = level * 1.0 / scale;
 
-        System.out.println("Level: " + level);
-        System.out.println("Scale: " + scale);
-        System.out.println("Percentage :" + percentage);
-        if (percentage <= LOW_BATTERY_PERCENTAGE) {
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL;
+
+        if (!isCharging && percentage <= LOW_BATTERY_PERCENTAGE) {
             Toast.makeText(context, R.string.low_battery_warning, Toast.LENGTH_LONG).show();
         }
     }
