@@ -107,13 +107,14 @@ public class WriterActivity extends AppCompatActivity {
 
 
     public void onClickStart(View view) {
-
-        startButton = (Button) findViewById(R.id.startTimerButton);
+        startButton = findViewById(R.id.startTimerButton);
         Button finishButton = findViewById(R.id.finishButton);
+        EditText editText = findViewById(R.id.writerDraft);
 
         startButton.setVisibility(View.INVISIBLE);
         finishButton.setVisibility(View.VISIBLE);
         timeView.setVisibility(View.VISIBLE);
+        editText.setVisibility(View.VISIBLE);
 
         connectAdjective();
         connectNoun();

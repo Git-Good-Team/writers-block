@@ -76,6 +76,7 @@
         android:layout_weight="1"
         android:textColor="@android:color/white"
         android:hint="@string/startWrite"
+        android:visibility="invisible"
         android:padding="16dp" />
 
     <Button
