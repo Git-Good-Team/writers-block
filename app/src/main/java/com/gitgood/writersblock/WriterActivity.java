@@ -158,7 +158,7 @@ public class WriterActivity extends AppCompatActivity {
     }
 
     public void timeOut() {
-        //handler.removeCallbacksAndMessages(null);
+        handler.removeCallbacksAndMessages(null);
         time.reset();
         saveDraftAndExit();
 
