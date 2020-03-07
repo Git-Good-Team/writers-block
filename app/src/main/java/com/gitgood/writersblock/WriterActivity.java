@@ -64,7 +64,12 @@ public class WriterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        Intent intent = new Intent(this, TimerService.class);
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
         setContentView(R.layout.activity_writer);
         verbView = findViewById(R.id.tAdjective);
         nounView = findViewById(R.id.tNoun);
@@ -85,16 +90,14 @@ public class WriterActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+
         super.onStart();
 
-        if (timerEnabled) {
-            Intent intent = new Intent(this, TimerService.class);
-            bindService(intent, connection, Context.BIND_AUTO_CREATE);
-        }
     }
 
     @Override
     protected void onStop() {
+
         super.onStop();
 
         if (timerEnabled) {
