@@ -70,14 +70,14 @@
 
     <EditText
         android:id="@+id/writerDraft"
-        android:layout_width="match_parent"
+        android:layout_width="374dp"
         android:layout_height="0dp"
-        android:gravity="top"
         android:layout_weight="1"
-        android:textColor="@android:color/white"
+        android:gravity="top"
         android:hint="@string/startWrite"
-        android:visibility="invisible"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/finishButton"
