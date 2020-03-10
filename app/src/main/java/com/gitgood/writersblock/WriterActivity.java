@@ -119,7 +119,11 @@ public class WriterActivity extends AppCompatActivity {
 
         startButton.setVisibility(View.INVISIBLE);
         finishButton.setVisibility(View.VISIBLE);
-        timeView.setVisibility(View.VISIBLE);
+
+        if (timerEnabled){
+            timeView.setVisibility(View.VISIBLE);
+        }
+
         editText.setVisibility(View.VISIBLE);
 
         connectAdjective();
