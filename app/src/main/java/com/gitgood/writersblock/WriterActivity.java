@@ -71,7 +71,7 @@ public class WriterActivity extends AppCompatActivity {
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
         setContentView(R.layout.activity_writer);
-        verbView = findViewById(R.id.tAdjective);
+        verbView = findViewById(R.id.tVerb);
         nounView = findViewById(R.id.tNoun);
         timeView = findViewById(R.id.timer);
 
@@ -126,7 +126,7 @@ public class WriterActivity extends AppCompatActivity {
 
         editText.setVisibility(View.VISIBLE);
 
-        connectAdjective();
+        connectVerb();
         connectNoun();
 
         running = true;
@@ -134,6 +134,10 @@ public class WriterActivity extends AppCompatActivity {
 
     public void onClickFinish(View view) {
         saveDraftAndExit();
+        if(timerEnabled) {
+            handler.removeCallbacksAndMessages(null);
+            time.reset();
+        }
     }
 
     private void runTimer() {
@@ -176,7 +180,7 @@ public class WriterActivity extends AppCompatActivity {
         }
     }
 
-    private void connectAdjective() {
+    private void connectVerb() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -236,10 +240,10 @@ public class WriterActivity extends AppCompatActivity {
         EditText draft = findViewById(R.id.writerDraft);
         String stringDraft = draft.getText().toString();
 
-        TextView adj = findViewById(R.id.tAdjective);
+        TextView verb = findViewById(R.id.tVerb);
         TextView noun = findViewById(R.id.tNoun);
 
-        String title = adj.getText().toString()+ " " + noun.getText().toString();
+        String title = verb.getText().toString()+ " " + noun.getText().toString();
 
         long rowId = db.insertDraft(title, stringDraft);
 

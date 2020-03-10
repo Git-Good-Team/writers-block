@@ -21,10 +21,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tAdjective"
+            android:id="@+id/tVerb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/adjective"
+            android:hint="@string/verb"
             android:layout_margin="16dp"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"
